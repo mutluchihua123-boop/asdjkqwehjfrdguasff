@@ -1,41 +1,37 @@
-# Compiled Lua sources
-luac.out
+local rj = false
+local plr = game.Players.LocalPlayer
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
+function rejoin()
+    if rj then return end
+    rj = true
+    plr:Kick("\nRejoining...")
+    wait()
+    task.spawn(function()
+        while true do
+            game:GetService("TeleportService"):Teleport(game.PlaceId, plr)
+            task.wait(1)
+        end
+    end)
+end
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
+game:GetService("GuiService").ErrorMessageChanged:Connect(function()
+    rejoin()
+end)
 
-# Precompiled Headers
-*.gch
-*.pch
+task.spawn(function()
+    while true do
+        pcall(function()
+            local p = #game.Players:GetPlayers()
+            if p <= 4 then
+                rejoin()
+            end
+        end)
+        game:GetService("RunService").Heartbeat:Wait()
+    end
+end)
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
+game.Players.LocalPlayer.OnTeleport:Connect(function(State)
+    if queueteleport then
+        queueteleport('githuba yuklemen lazim brocaco')
+    end
+end)
