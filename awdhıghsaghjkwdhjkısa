@@ -1,17 +1,19 @@
+local queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/obwan8228/Velocity/refs/heads/main/VelocityKat2d"))()
+
 local rj = false
-local plr = game.Players.LocalPlayer
 
 function rejoin()
-    if rj then return end
-    rj = true
+if rj then return end
+rj = true
     plr:Kick("\nRejoining...")
     wait()
-    task.spawn(function()
-        while true do
-            game:GetService("TeleportService"):Teleport(game.PlaceId, plr)
-            task.wait(1)
-        end
-    end)
+task.spawn(function()
+while true do    game:GetService("TeleportService"):Teleport(game.PlaceId, plr)
+task.wait(1)
+end
+end)
 end
 
 game:GetService("GuiService").ErrorMessageChanged:Connect(function()
@@ -19,19 +21,19 @@ game:GetService("GuiService").ErrorMessageChanged:Connect(function()
 end)
 
 task.spawn(function()
-    while true do
-        pcall(function()
-            local p = #game.Players:GetPlayers()
-            if p <= 4 then
-                rejoin()
-            end
-        end)
-        game:GetService("RunService").Heartbeat:Wait()
-    end
+while true do
+pcall(function()
+local p = #game.Players:GetPlayers()
+if p <= 4 then end
+rejoin()
+end
+end)
+game:GetService("RunService").Heartbeat:Wait()
+end
 end)
 
 game.Players.LocalPlayer.OnTeleport:Connect(function(State)
-    if queueteleport then
-        queueteleport('githuba yuklemen lazim brocaco')
-    end
+ if queueteleport then
+  queueteleport('https://github.com/mutluchihua123-boop/asdjkqwehjfrdguasff.git')
+ end
 end)
